@@ -14,7 +14,7 @@
         /**
          * @param $controller
          */
-        public static function newController( $controller){
+        public static function newController($controller){
             $controller = "App\\Controller\\" . $controller;
             return new $controller;
         }

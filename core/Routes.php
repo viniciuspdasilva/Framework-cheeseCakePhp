@@ -27,7 +27,8 @@
             $this->url = $url;
         }
         private function getUrl(){
-            return parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+            $url = parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH);
+            return $url;
         }
         private function setRoutes($routes){
             foreach ($routes as $route){
@@ -49,6 +50,7 @@
                     endif;
                     $route[0] = implode($routeArray,'/');
                 endfor;
+                var_dump($route);
                 if ($url == $route[0]):
                     $found = TRUE;
                     $controller = $route[1];
@@ -58,7 +60,7 @@
             }
             if ($found){
                 $controller = Container::newController($controller);
-                $controller->$action;
+                $controller->$action();
 
             }
 
