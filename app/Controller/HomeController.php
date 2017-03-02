@@ -16,12 +16,13 @@
 
         public function index(){
             $this->view->nome = "Vinicius Pereira da Silva";
-            $this->renderView('home/index','layout');
+            $this->renderView('home/index','layout','home');
 
         }
         public function show($id, $request){
             echo $id," --- ","<br/>";
             echo $request->get->id;
         }
+
 
     }

@@ -1,0 +1,7 @@
+@import "bootstrap.min.css";
+@import "bootstrap-responsive.min.css";
+@import "bootstrap-theme.min.css";
+
+.row-bottom-20{margin-bottom: 20px}
+h1{
+    color: rgba(0,0,0,0.4);}

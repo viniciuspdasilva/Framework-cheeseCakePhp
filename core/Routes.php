@@ -88,8 +88,11 @@
                 }
 
             }else{
-                echo "Pagina não encontrada";
-            }
+                $errorContraller = "ErrosController";
+                $action = 'Error404';
+                $controller = @Container::newController($errorContraller);
+                $controller->$action();
+             }
 
         }
 
