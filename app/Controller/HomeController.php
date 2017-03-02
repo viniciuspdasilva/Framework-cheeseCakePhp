@@ -12,10 +12,11 @@
     class homeController
     {
         public function index(){
-            echo "ChesseCake Framework";
+          require_once __DIR__."/../Views/home/index.phtml";
         }
-        public function show($id){
-            echo $id," --- ", homeController::index();
+        public function show($id, $request){
+            echo $id," --- ","<br/>";
+            echo $request->get->id;
         }
 
     }

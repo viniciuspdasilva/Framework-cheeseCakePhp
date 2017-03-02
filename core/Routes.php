@@ -38,6 +38,17 @@
             }
             $this->routes = $newRoutes;
         }
+
+        private function getRequest(){
+           $obj = new \stdClass();
+           foreach ($_GET as $key => $value){
+               $obj->get->$key = $value;
+           }
+            foreach ($_POST as $key => $value){
+                $obj->post->$key = $value;
+            }
+            return $obj;
+        }
         private function run(){
             $found = FALSE;
             $url = $this->getUrl();
@@ -63,20 +74,22 @@
                 $controller = @Container::newController($controller);
                 switch(count($param)){
                     case 1:
-                        $controller->$action($param[0]);
+                        $controller->$action($param[0],$this->getRequest());
                     break;
                     case 2:
-                        $controller->$action($param[0],$param[1]);
+                        $controller->$action($param[0],$param[1],$this->getRequest());
                     break;
                     case 3:
-                        $controller->$action($param[0],$param[1],$param[2]);
+                        $controller->$action($param[0],$param[1],$param[2],$this->getRequest());
                     break;
                     default:
-                        $controller->$action();
+                        $controller->$action($this->getRequest());
                     break;
 
                 }
 
+            }else{
+                echo "Pagina não encontrada";
             }
 
         }
