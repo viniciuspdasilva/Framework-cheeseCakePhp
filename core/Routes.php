@@ -39,6 +39,7 @@
             $this->routes = $newRoutes;
         }
         private function run(){
+            $found = FALSE;
             $url = $this->getUrl();
             $urlarray = explode('/',$url);
             foreach ($this->routes as $route){
@@ -59,8 +60,22 @@
                 endif;
             }
             if ($found){
-                $controller = Container::newController($controller);
-                $controller->$action();
+                $controller = @Container::newController($controller);
+                switch(count($param)){
+                    case 1:
+                        $controller->$action($param[0]);
+                    break;
+                    case 2:
+                        $controller->$action($param[0],$param[1]);
+                    break;
+                    case 3:
+                        $controller->$action($param[0],$param[1],$param[2]);
+                    break;
+                    default:
+                        $controller->$action();
+                    break;
+
+                }
 
             }
 

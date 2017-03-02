@@ -14,5 +14,8 @@
         public function index(){
             echo "ChesseCake Framework";
         }
+        public function show($id){
+            echo $id," --- ", homeController::index();
+        }
 
     }
