@@ -5,9 +5,9 @@
      * Date: 24/02/2017
      * Time: 15:56
      */
-
     namespace Core;
-
+    error_reporting(1);
+    ini_set('display_errors', 1);
 
     class Routes
     {
@@ -62,7 +62,6 @@
                     endif;
                     $route[0] = implode($routeArray,'/');
                 endfor;
-                var_dump($route);
                 if ($url == $route[0]):
                     $found = TRUE;
                     $controller = $route[1];

@@ -9,7 +9,9 @@
     namespace App\Controller;
 
 
-    class alunosController
+    use Core\BaseController;
+
+    class alunosController extends BaseController
     {
         public function show(){
             return view();

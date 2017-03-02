@@ -9,10 +9,15 @@
     namespace App\Controller;
 
 
-    class homeController
+    use Core\BaseController;
+
+    class homeController extends BaseController
     {
+
         public function index(){
-          require_once __DIR__."/../Views/home/index.phtml";
+            $this->view->nome = "Vinicius Pereira da Silva";
+            $this->renderView('home/index','layout');
+
         }
         public function show($id, $request){
             echo $id," --- ","<br/>";
