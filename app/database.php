@@ -12,7 +12,7 @@
             ],
             'mysql' => [
                     'host'      => 'localhost',
-                    'database'  => 'cheasseCake',
+                    'database'  => 'bd_pessoa',
                     'user'      => 'root',
                     'pass'      => '',
                     'charset'   => 'utf8',
