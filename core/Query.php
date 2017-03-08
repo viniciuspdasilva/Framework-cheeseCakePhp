@@ -7,12 +7,12 @@
      */
 
     namespace Core;
+    use Core\Gramar;
 
-
-    abstract class Query
+    abstract class Query extends Gramar
     {
         protected function querySelect($link){
-            /*TODO:Implementar a logica do Select*/
+            
             echo 'select';
         }
         protected function queryInsert($link){

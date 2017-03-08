@@ -19,7 +19,7 @@
             $this->pdo = $pdo;
         }
 
-        public function All(){
+        protected function All(){
             $query = "SELECT * FROM{$this->table}";
             $stmt  = $this->pdo->prepare($query);
             $stmt->execute();
@@ -27,7 +27,7 @@
             $stmt->closeCursor();
             return $result;
         }
-        public function buscaPorId($id){
+        protected function buscaPorId($id){
             $query = "SELECT * FROM{$this->table} WHERY id = {$id}";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
