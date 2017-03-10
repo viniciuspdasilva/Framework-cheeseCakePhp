@@ -7,50 +7,50 @@
      */
 
     namespace Core;
+    use stdClass;
 
-
-    abstract class Gramar
+    class Gramar
     {
 
-        protected const OPERADOR_SOMA  = '+';
-        protected const OPERADOR_SUB   = '-';
-        protected const OPERADOR_MULT  = '*';
-        protected const OPERADOR_DIV   = '/';
+        const OPERADOR_SOMA  = '+';
+        const OPERADOR_SUB   = '-';
+        const OPERADOR_MULT  = '*';
+        const OPERADOR_DIV   = '/';
 
-        protected const OPERADOR_IGUAL = '=';
-        protected const OPERADOR_MAIOR = '>';
-        protected const OPERADOR_MENOR = '<';
-        protected const OPERADOR_MENOR_IGUAL = '<=';
-        protected const OPERADOR_MAIOR_IGUAL = '>=';
-        protected const OPERADOR_DIFERENTE = '<>';
-        protected const OPERADOR_IGUAL_NULL = '<=>';
+        const OPERADOR_IGUAL = '=';
+        const OPERADOR_MAIOR = '>';
+        const OPERADOR_MENOR = '<';
+        const OPERADOR_MENOR_IGUAL = '<=';
+        const OPERADOR_MAIOR_IGUAL = '>=';
+        const OPERADOR_DIFERENTE = '<>';
+        const OPERADOR_IGUAL_NULL = '<=>';
 
-        protected const OPERADOR_E   = 'AND';
-        protected const OPERADOR_OU  = 'OR';
-        protected const OPERADOR_NOT = 'NOT';
-        protected const OPERADOR_XOR = 'XOR';
-        protected const OPERADOR_IS_NULL  = 'IS NULL';
-        protected const OPERADOR_NOT_NULL = 'IS NOT NULL';
+        const OPERADOR_E   = 'AND';
+        const OPERADOR_OU  = 'OR';
+        const OPERADOR_NOT = 'NOT';
+        const OPERADOR_XOR = 'XOR';
+        const OPERADOR_IS_NULL  = 'IS NULL';
+        const OPERADOR_NOT_NULL = 'IS NOT NULL';
 
-        protected const OPERADOR_BETWEEN = 'BETWEEN';
-        protected const OPERADOR_IN = 'IN';
-        protected const OPERADOR_NOT_IN = 'NOT IN';
-        protected const OPERADOR_COALESCE = 'COALESCE';
-        protected const OPERADOR_INTERVAL = 'INTERVAL';
+        const OPERADOR_BETWEEN = 'BETWEEN';
+        const OPERADOR_IN = 'IN';
+        const OPERADOR_NOT_IN = 'NOT IN';
+        const OPERADOR_COALESCE = 'COALESCE';
+        const OPERADOR_INTERVAL = 'INTERVAL';
 
-        protected const OPERADOR_ALL = 'ALL';
-        protected const OPERADOR_DISTINT = 'DISTINT';
-        protected const OPERADOR_GROUP_BY = 'GROUP BY';
-        protected const OPERADOR_GROUP_BY_ASC = 'ALL';
-        protected const OPERADOR_GROUP_BY_DESC = 'DESC';
-        protected const OPERADOR_LIMIT = 'LIMIT';
-        protected const OPERADOR_ORDER_BY = 'ORDER BY';
-        protected const OPERADOR_ORDER_BY_ASC = 'ASC';
-        protected const OPERADOR_ORDER_BY_DESC = 'DESC';
+        const OPERADOR_ALL = 'ALL';
+        const OPERADOR_DISTINT = 'DISTINT';
+        const OPERADOR_GROUP_BY = 'GROUP BY';
+        const OPERADOR_GROUP_BY_ASC = 'ALL';
+        const OPERADOR_GROUP_BY_DESC = 'DESC';
+        const OPERADOR_LIMIT = 'LIMIT';
+        const OPERADOR_ORDER_BY = 'ORDER BY';
+        const OPERADOR_ORDER_BY_ASC = 'ASC';
+        const OPERADOR_ORDER_BY_DESC = 'DESC';
 
-        protected static $gramar; /*Define a gramatica que deverá ser utilizada, */
-        protected static $operadores; /*Define um array de operadores de acordo com driver utilizado*/
-        protected static $opr_select;
+        protected $gramar; /*Define a gramatica que deverá ser utilizada, */
+        protected $operadores; /*Define um array de operadores de acordo com driver utilizado*/
+        protected $opr_select;
 
 
         /**
@@ -59,73 +59,61 @@
          * @param array  $operadores
          * @param array  $opr_select
          */
-        function  __construct ( $gramar = 'mysql')
+        protected function  __construct ( $gramar = 'mysql')
         {
             $this->setGramar($gramar);
-            self::excOperadores();
-            self::excOperadores();
-
         }
 
         /**
          * @return mixed
          */
-        public function getGramar ()
+        private final function getGramar ()
         {
-            return self::$gramar;
+            return $this->gramar;
         }
 
         /**
          * @param mixed $gramar
          */
-        public function setGramar ( $gramar )
+        private final function setGramar ( $gramar )
         {
-            if (!isset(self::$gramar)){
-                self::$gramar = $gramar;
-            }
+              $this->gramar = $gramar;
         }
 
         /**
          * @return mixed
          */
-        public function getOperadores ()
+        protected  function getOperadores ()
         {
-            return self::$operadores;
+            return $this->operadores;
         }
 
         /**
          * @param mixed $operadores
          */
-        public function setOperadores ( $operadores )
+        private final function setOperadores ( $operadores )
         {
-            if (!isset(self::$operadores)){
-                self::$operadores = $operadores;
-            }
+            $this->operadores = $operadores;
         }
 
         /**
          * @return mixed
          */
-        public function getOprSelect ()
+        protected  function getOprSelect ()
         {
-            return self::$opr_select;
+            return $this->opr_select;
         }
 
         /**
          * @param mixed $opr_select
          */
-        public function setOprSelect ( $opr_select )
+        private final function setOprSelect ( array $opr_select )
         {
-            if (!isset(self::$opr_select)){
-                self::$opr_select = $opr_select;
-            }
+           $this->opr_select = $opr_select;
         }
 
         protected static function excOperadores(){
-            $opr  = NULL;
-            switch (self::getGramar()){
-                case 'mysql' || 'MYSQL':
-                    $opr[] = [
+            $opr[] = array(
                         'LOGICOS'       => [
                             'E'             => self::OPERADOR_E,
                             'OU'            => self::OPERADOR_OU,
@@ -157,19 +145,22 @@
                             'COALESCE'      => self::OPERADOR_COALESCE,
                             'INTERVAL'      => self::OPERADOR_INTERVAL
                         ]
-                    ];
-
-                     self::setOperadores($opr);
-                     return self::getOperadores();
-                break;
-                case 'sqlite':
-                    echo 'Gramatica em atualização';
-                        exit();
-                    break;
+            );
+            $selects = new stdClass();
+            foreach ($opr as $key=>$value){
+                $selects->$key = $value;
+                foreach ($selects->$key as $key1 => $value1) {
+                    $selects->$key1 = $value1;
+                    unset($selects->$key);
+                }
             }
+            $selects->logico = $selects->LOGICOS;
+            $selects->comparacao = $selects->COMPARACAO;
+            $selects->aritmetricos = $selects->ARITMETICOS;
+            $selects->mysql = $selects->MYSQL;
+            return $selects;
         }
-        protected static function excSelect(){
-            $selectOpr = null;
+        protected  function excSelect(){
             switch (self::getGramar()){
                 case 'mysql':
                     $selectOpr[] = [
@@ -191,8 +182,8 @@
                             'LIMIT' => self::OPERADOR_LIMIT
                         ]
                     ];
-                    self::setOprSelect($selectOpr);
-                    return self::getOprSelect();
+                    $this->setOprSelect($selectOpr);
+                    return TRUE;
                 break;
             }
         }

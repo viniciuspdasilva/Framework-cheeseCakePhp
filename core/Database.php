@@ -43,6 +43,7 @@
 
         public function __construct($crud) {
             $this->run($crud);
+            parent::__construct();
         }
 
         public function getInstance() {
@@ -71,21 +72,24 @@
          * opcoes ->
          * */
         public function run($crud){
-            $conn = Database::getInstance();
+            $conn   = Database::getInstance();
+            $table  = array('nome','telefone','email',11,11,11,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+            $values = array('Nome', 'Telefone', 'Email', '11');
+            $where = 'id = 1 AND nome <> 1';
             switch ($crud){
-                case 'select' || 'SELECT':
-                    $select = Query::querySelect($conn);
+                case "SELECT":
+                    $select = Query::querySelect($conn,'alunos',$table,$where);
                     return $select;
                 break;
-                case 'insert' || 'INSERT':
-                    $insert = Query::queryInsert($conn);
+                case "INSERT":
+                    $insert = Query::queryInsert($conn,'alunos',$table,$values,$where);
                     return $insert;
                 break;
-                case 'update' || 'UPDATE':
+                case "UPDATE":
                     $update = Query::queryUpdate($conn);
                     return $update;
                 break;
-                case 'delete' || 'DELETE':
+                case "DELETE":
                     $delete = Query::queryDelete($conn);
                 break;
             }

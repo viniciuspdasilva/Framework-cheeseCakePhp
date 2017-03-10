@@ -8,8 +8,9 @@
 
     namespace Core;
     use PDO;
+    use Core\Database;
 
-    abstract class BaseModel
+    abstract class BaseModel extends Database
     {
         private $pdo;
         protected $table;
@@ -20,12 +21,8 @@
         }
 
         protected function All(){
-            $query = "SELECT * FROM{$this->table}";
-            $stmt  = $this->pdo->prepare($query);
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-            $stmt->closeCursor();
-            return $result;
+            $query = $this->querySelect($this->pdo, $this->table);
+            return $query;
         }
         protected function buscaPorId($id){
             $query = "SELECT * FROM{$this->table} WHERY id = {$id}";
