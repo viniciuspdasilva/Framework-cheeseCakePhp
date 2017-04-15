@@ -10,11 +10,12 @@
 
 
     use Core\BaseController;
+    use Core\ViewBase;
 
     class ErrosController extends BaseController
     {
         public function Error404(){
-            $this->renderView('Erros/404','layout-erros');
+            ViewBase::view('Erros/404.tpl');
         }
 
     }

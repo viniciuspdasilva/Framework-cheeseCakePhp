@@ -10,7 +10,10 @@
   "autoload":{
     "psr-4":{
       "App\\":"app/",
-      "Core\\":"core/"
+      "App\\Model":"app/Model",
+      "Core\\":"core/",
+      "Util\\":"utill/",
+      "Smarty":"utill/Smarty/"
     }
   },
   "require":{

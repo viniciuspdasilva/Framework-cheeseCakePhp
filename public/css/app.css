@@ -1,7 +1,46 @@
-@import "bootstrap.min.css";
-@import "bootstrap-responsive.min.css";
-@import "bootstrap-theme.min.css";
+@import "Bootstrap-alpha/app.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+.row-bottom-20{margin-bottom: 20px
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Open Sans',Arial,Helvetica,Sans-Serif, Verdana, Tahoma;
+}
+.table_relatorios{
+    padding:5px;
+    margin-top: 30px;
+    box-sizing: border-box;
+}
+#grafico{
+    height: 500px;
+    width: 500px;
+    min-width: 310px;
+    padding:20px;
+    margin-top:50px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    border-radius: 4%;
+    box-sizing: border-box;
+    box-shadow: 9px 5px rgba(0,0,0,0.7);
 
-.row-bottom-20{margin-bottom: 20px}
-h1{
-    color: rgba(0,0,0,0.4);}
+}
+.menu_lateral{
+    height: auto;
+    width: 600px;
+    background-color: #dddddd;
+}
+.conteudoIndividual input[type="text"], input[type="number"]{
+    border: transparent;
+    border-bottom: 1px solid #b2b2b2;
+    background: linear-gradient(to top, rgba(0,0,0,0.3),rgba(0,0,0,0));
+    color:black;
+}
+
+.list-group{
+    width: 400px;
+    margin-top: 30px;
+}

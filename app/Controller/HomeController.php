@@ -9,15 +9,18 @@
     namespace App\Controller;
 
 
+
     use Core\BaseController;
+    use Core\ViewBase;
+    use Core\BaseModel;
+    use App\Model\AlunoModel;
+    use MongoDB\Driver\Query;
 
     class homeController extends BaseController
     {
 
         public function index(){
-            $this->view->nome = "Vinicius Pereira da Silva";
-            $this->renderView('home/index','layout','home');
-
+            ViewBase::view('Index/index.tpl');
         }
         public function show($id, $request){
             echo $id," --- ","<br/>";

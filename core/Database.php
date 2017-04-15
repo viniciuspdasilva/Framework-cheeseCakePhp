@@ -39,24 +39,19 @@
             }
             return $database;
         }
-
-
         public function __construct($crud) {
             $this->run($crud);
-            parent::__construct();
         }
-
         public function getInstance() {
-            $database = $this->factoryDatabase();
-            var_dump($database);
-            $host = $database['host'];
-            $data = $database['database'];
-            $charset = $database['charset'];
-            $user    = $database['user'];
-            $pass    = $database['pass'];
+            $database  = self::factoryDatabase();
+            $host      = $database['host'];
+            $data      = $database['database'];
+            $charset   = $database['charset'];
+            $user      = $database['user'];
+            $pass      = $database['pass'];
             $collation = $database['collation'];
             try{
-                    $pdo = new PDO("mysql:host=$host;dbname=$data;charset=$charset","$user","$pass");
+                    $pdo = new PDO("mysql:host=$host;dbname=$data;","$user","$pass");
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $pdo->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND,"SET NAMES '$charset' COLLATE '$collation'
                     ");
@@ -73,8 +68,8 @@
          * */
         public function run($crud){
             $conn   = Database::getInstance();
-            $table  = array('nome','telefone','email',11,11,11,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
-            $values = array('Nome', 'Telefone', 'Email', '11');
+            $table  = array('Nome', 'Email');
+            $values = array('Vinicius','Viniciussilva@gmail.com');
             $where = 'id = 1 AND nome <> 1';
             switch ($crud){
                 case "SELECT":
@@ -86,11 +81,11 @@
                     return $insert;
                 break;
                 case "UPDATE":
-                    $update = Query::queryUpdate($conn);
+                    $update = Query::queryUpdate($conn,'alunos',$table,$values,$where);
                     return $update;
                 break;
                 case "DELETE":
-                    $delete = Query::queryDelete($conn);
+                    $delete = Query::queryDelete($conn,'alunos',$where);
                 break;
             }
         }

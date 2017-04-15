@@ -28,15 +28,34 @@
             $query = "SELECT * FROM{$this->table} WHERY id = {$id}";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
-            $result = $stmt->fetchAll();
+            $result = $stmt->fetchObject();
             $stmt->closeCursor();
             return $result;
         }
 
-        public function rel()
-        {
-            
+
+
+
+        /*public function*/
+        public function createTable($table,array $campos){
+            $pdo = Database::getInstance();
+           $sql = '';
+           $cont = 0;
+           $size = -1;
+           $size = count($campos);
+           $sql .= "CREATE TABLE $table (";
+           foreach ($campos as $campo){
+               $sql .= "$campo";
+               $cont++;
+               if ($cont < $size){
+                   $sql .= ' , ';
+               }
+           }
+           $sql .= ')';
+           $stmt = $pdo->prepare($sql);
+           $create = $stmt->execute();
+           if ($create){
+               echo 'table criada com sucesso!';
+           }
         }
-
-
     }

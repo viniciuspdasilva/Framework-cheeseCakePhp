@@ -7,54 +7,58 @@
      */
 
     namespace Core;
-
-
+    use Exception;
     abstract class BaseController
     {
-        protected $view;
-        private $viewPath;
-        private $layoutPath;
+        private $request;
 
-        function __construct ()
-        {
-            $this->view = new \stdClass();
-        }
-        protected function renderView($caminho,$layoutPath = NULL,$title=NULL){
-               $this->viewPath   = $caminho;
-               $this->layoutPath = $layoutPath;
-               if($layoutPath){
-                   $this->layout();
-               }else {
-                   $this->content();
-               }
-        }
-        /*public function setTitle($title){
-            $title = new \stdClass();
-            $title->nome = $title;
-            $this->getTitle($title);
-        }
-        protected function getTitle($title){
-            if ($title !== NULL){
-                $titlePag = new \stdClass();
-                $titlePag->nome = $title;
-                return $titlePag;
+        public static function get(array $get):array {
+            if ($get != null){
+                if (isset($get)){
+                    $campos = array();
+                    foreach ($get as $key => $value){
+                        $campos = [
+                            $key => $value
+                        ];
+                    }
+                    return $campos;
+                }else{
+                    return array(null);
+                }
             }else{
-                echo "CheeseCake - Framework";
-            }
-        }*/
-        protected function content(){
-            if(file_exists( __DIR__."/../app/Views/{$this->viewPath}.phtml")){
-                require_once __DIR__."/../app/Views/{$this->viewPath}.phtml";
-            }else{
-                echo "Error: View patch não encontrada";
+                throw new \Exception("Get Vazio");
             }
         }
-        protected function layout(){
-            if(file_exists( __DIR__."/../app/Views/{$this->layoutPath}.phtml")){
-                require_once __DIR__."/../app/Views/{$this->layoutPath}.phtml";
+        public static function post(array $post):array {
+        if ($post != null){
+            if (isset($post)){
+                $campos = array();
+                foreach ($post as $value){
+                    array_push($campos, $value);
+                }
+                return $campos;
             }else{
-                echo "Error: Layout patch não encontrada";
+                return array(null);
             }
+        }else{
+            throw new \Exception("Get Vazio");
         }
-
     }
+        public static function req(array $request):array {
+            if ($request != null){
+                if (isset($request)){
+                    $campos = array();
+                    foreach ($request as $key => $value){
+                        $campos = [
+                            $key => $value
+                        ];
+                    }
+                    return $campos;
+                }else{
+                    return array(null);
+                }
+            }else{
+                throw new \Exception("Get Vazio");
+            }
+        }
+}
